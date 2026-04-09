@@ -2,7 +2,7 @@ import struct
 import csv
 from pathlib import Path
 from utilityProc import utilityProc
-
+import torch
 
 class featureScaling():
     
@@ -13,6 +13,7 @@ class featureScaling():
     PDW_PA_list: list = []
     PDW_SIGTYPE_list: list = []
     PDW_DTOA_list: list = []
+    PDW_data_tensor: torch.tensor
 
     def __init__(self):
         super().__init__()
@@ -24,6 +25,7 @@ class featureScaling():
         self.PDW_PA_list: list = []
         self.PDW_SIGTYPE_list: list = []
         self.PDW_DTOA_list: list = []
+        self.PDW_data_tensor = None
 
     def CSVFileProc(self, tFilePath : Path)-> int:        
         #with open('example.csv', 'r', encoding='cp949') as file:
@@ -48,7 +50,7 @@ class featureScaling():
             utilityProc.logPrint(str(self.PDW_TOA_list[-1]) +", "+ str(self.PDW_DTOA_list[-1]) +", "+ str(self.PDW_FREQ_list[-1])
                                  +", "+ str(self.PDW_PW_list[-1]) +", "+ str(self.PDW_AOA_list[-1]) +", "+ str(self.PDW_PA_list[-1])
                                  +", "+ str(self.PDW_SIGTYPE_list[-1]))
-                   
+
     def readPDWData(self, ReadMode : int, tFilePath : Path ) -> None:
         #CSV Read
         match ReadMode:
